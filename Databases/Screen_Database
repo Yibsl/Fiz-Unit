@@ -1,0 +1,92 @@
+Pos={
+    Fpos
+    Ipos
+    Zpos
+}
+
+BatVoltage=Int
+
+RecStatus=bolean
+
+Lidar=Int
+
+Marks={
+    mark1
+    mark2
+}
+
+
+Backup:
+
+#read Fpos,Ipos and Zpos and store in Screen_Database
+#store BatVoltage in Screen_Database
+#store RecStatus in Screen_Database
+#if Lidar store lidar value
+#save Marks in Screen_Database
+
+import sqlite3
+import json
+
+class Screen():
+    # Create a connection to the database (or create it if it doesn't exist)
+    Screen_Database = sqlite3.connect(r"/home/kali/Desktop/Struktur/Databases/Screen_Database.db")
+
+    # Create a cursor object to execute SQL commands
+    cursor = Screen_Database.cursor()
+
+    cursor.execute("DROP TABLE Data")
+    # Create a table with columns: Pos (text), BatVoltage (integer), RecStatus (integer),
+    # Lidar (integer), and Marks (text)
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Data
+                    (Pos TEXT, BatVoltage INTEGER, RecStatus INTEGER, Lidar INTEGER, Marks TEXT)''')
+
+    # Function to insert data into the table
+    def insert_data(data):
+        data_to_insert = json.dumps(data)  # Convert the dictionary to a JSON string
+        cursor.execute('''INSERT INTO Data (Pos, BatVoltage, RecStatus, Lidar, Marks) VALUES (?, ?, ?, ?, ?)''',
+                    (json.dumps(data["Pos"]), data["BatVoltage"], int(data["RecStatus"]), data["Lidar"], json.dumps(data["Marks"])))
+        Screen_Database.commit()
+
+    # Function to update a single value in the table
+    def update_single_value(column, value):
+        cursor.execute(f'''UPDATE Data SET {column} = ?''', (value,))
+        Screen_Database.commit()
+
+    # Function to print a single value from the table
+    def print_single_value(column):
+        cursor.execute(f'''SELECT {column} FROM Data''')
+        value = cursor.fetchone()
+        if value:
+            print(f'{value[0]}')
+
+            return (f'{value[0]}')
+        else:
+            print(f'No data found for {column}.')
+
+    # Sample data
+    sample_data = {
+        "Pos": {"Fpos": 10, "Ipos": 20, "Zpos": 5},
+        "BatVoltage": 12,
+        "RecStatus": True,
+        "Lidar": 150,
+        "Marks": {"A": 1, "B": 2, "C": 3}
+    }
+
+    # Insert data into the table
+    insert_data(sample_data)
+
+    # Update and print individual values
+    if True:
+        print_single_value("Pos")
+        Pos={"Fpos": 4, "Ipos": 2, "Zpos": 35}
+        update_single_value("Pos", str(Pos))
+        print_single_value("Pos")
+
+        update_single_value("RecStatus", True)
+        print_single_value("RecStatus")
+    Marks=print_single_value("Marks")
+    print("Lidar",Marks)
+
+    # Close the cursor and connection
+    cursor.close()
+    Screen_Database.close()

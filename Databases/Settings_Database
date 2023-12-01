@@ -1,0 +1,40 @@
+Screen
+    brigtness
+        0-100
+    colors
+        Focus  
+            RGB
+        Iris   
+            RGB
+        Zoom    
+            RGB
+        Background
+            RGB
+
+Focus_wheel
+    direction
+        cw
+        ccw
+    resistance
+        0-10
+    vibration
+        0-10
+    sensebility
+        0-10
+
+Iris_slider
+    resistance
+        0-10
+
+Zoom_wheel
+    direction
+        cw
+        ccw
+    sensebility
+        0-10
+
+Autofocus
+    enabled
+    disabled
+
+CurrentLense=str

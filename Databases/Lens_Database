@@ -1,0 +1,12 @@
+Id=int
+Name=str
+Zoom=bolean
+mm_min=int
+mm_max=int
+Apature_min=int
+Apature_max=int
+Focus_min=int
+Focus_max=int
+Focus=dictionary
+Iris=dictionary
+Zoom=dictionary
