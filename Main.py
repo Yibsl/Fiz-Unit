@@ -1,6 +1,6 @@
 import time
 import Utils.Screen.Builder
-from Debug import *
+from Utils.Debug import *
 
 status="main"
 x=0
