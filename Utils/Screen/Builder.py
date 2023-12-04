@@ -26,7 +26,7 @@ class builder:
         debug(2,"Build Main")
         self.screen.fill(self.BackgroundColor)  # Fülle den Bildschirm mit Schwarz, um vorherige Zeichnungen zu löschen
         #self.Focus.draw()
-        self.Iris.draw(300)
+        self.Iris.draw()
         #self.Zoom.draw(300)
         #self.Infos.draw()
         pg.display.flip()  # Aktualisiere den Bildschirm
