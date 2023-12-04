@@ -2,7 +2,7 @@ import pygame as pg
 import numpy as np
 import re
 import json
-from Debug import *
+from Utils.Debug import *
 import Utils.Read_Write
 
 

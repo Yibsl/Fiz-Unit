@@ -2,7 +2,7 @@ import sqlite3 as sq
 import json
 import random
 import time
-from Debug import *
+from Utils.Debug import *
 
 
 class Focus:

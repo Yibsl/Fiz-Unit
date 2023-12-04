@@ -1,5 +1,5 @@
 import pygame as pg
-from Debug import *
+from Utils.Debug import *
 from Utils.Screen.Elements import *
 
 class builder:
