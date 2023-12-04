@@ -11,11 +11,10 @@ while False:
 start=time.time()
 print(start)
 while time.time()-start<20:
-#for i in range(0, 200):
-    #print(i)
     Iris=Utils.Read_Write.Iris()
-    Iris.update_values(random.randint(0,100),"up")
-    time.sleep(0.1)
-    #print(Iris.get("Pos"),time.time()-start)
-  
+    Iris.update_values(random.randint(100,500),"up")
+    #print(Iris.get("Pos"))
+    #time.sleep(0.1)
+    print(Iris.get("Pos"),time.time()-start)
+
 Iris.close()
