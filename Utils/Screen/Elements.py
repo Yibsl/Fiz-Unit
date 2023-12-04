@@ -71,13 +71,15 @@ class Iris:
     def __init__(self,screen):
         debug(1, "innit Iris")
         self.screen=screen
-        self.iris=0
+        
         
 
     def update(self):
         self.width=2
         self.len=10
         self.objektiv=False
+        self.iris=Utils.Read_Write.Iris()
+        self.pfeil = self.iris.get("Pos")
 
         c=[int(s) for s in re.findall(r'\b\d+\b', settings.get_by_key("ColorI","Screen"))]
         self.color=(c[0],c[1],c[2])
@@ -85,10 +87,10 @@ class Iris:
         self.iris=json.loads(settings.get_by_id("Iris","Lenses",id)[0].replace("'", '"')) #Importiert Str und wandelt es in ein Dic um
 
 
-    def draw(self,position):
-        Iris.update(self)
-        pos=(0,100)
 
+    def draw(self):
+        Iris.update(self)
+        pos=(10,100)
         hight=400
         x_an = pos[0]
         y= pos[1]
@@ -98,17 +100,16 @@ class Iris:
 
     #Rectangle
         pg.draw.rect(self.screen,self.color,(-1,90,51,420),1)
-    #Pfeil  
-        pg.draw.line(self.screen,self.color,(0,position),(5,position+5),5)
-        pg.draw.line(self.screen,self.color,(0,position+10),(5,position+5),5)
-
     #Linien/zahlen 
-        #if self.irsi
         for i in self.iris.keys():
             j=self.iris.get(i)
             pg.draw.line(self.screen, self.color, [x_an,y], [x_end, y], self.width)
             Text.renderText(self.screen, [x_end+5, y], str(j),1,10,self.color)
             y+=step
+    #Pfeil
+        pg.draw.line(self.screen,self.color,(0,self.pfeil),(5,self.pfeil+5),5)
+        pg.draw.line(self.screen,self.color,(0,self.pfeil+10),(5,self.pfeil+5),5)
+
 
 class Zoom:
     def __init__(self,screen):
